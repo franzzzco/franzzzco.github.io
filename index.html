@@ -77,6 +77,43 @@
 </head>
 <body>
 
+  <!-- Modal de captura de leads -->
+  <div class="lead-modal" id="leadModal" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle" hidden>
+    <div class="lead-modal__overlay" data-close></div>
+    <div class="lead-modal__card">
+      <button class="lead-modal__close" type="button" data-close aria-label="Fechar">&times;</button>
+      <span class="lead-modal__badge">Avaliação 100% gratuita</span>
+      <h2 id="leadModalTitle" class="lead-modal__title">Ganhe uma <span class="gradient-text">análise gratuita do seu Instagram</span></h2>
+      <p class="lead-modal__lead">Preenche aqui que a gente analisa seu perfil de graça: o que está travando seu crescimento e o que dá pra melhorar pra vender mais. Sem compromisso.</p>
+      <form class="lead-form" id="leadForm" novalidate>
+        <div class="lead-form__field">
+          <label for="lf-nome">Nome</label>
+          <input type="text" id="lf-nome" name="nome" required autocomplete="name" placeholder="Seu nome" />
+        </div>
+        <div class="lead-form__field">
+          <label for="lf-empresa">Empresa</label>
+          <input type="text" id="lf-empresa" name="empresa" required placeholder="Nome do seu negócio" />
+        </div>
+        <div class="lead-form__field">
+          <label for="lf-instagram">@ do Instagram</label>
+          <input type="text" id="lf-instagram" name="instagram" required placeholder="@seuperfil" />
+        </div>
+        <div class="lead-form__row">
+          <div class="lead-form__field">
+            <label for="lf-telefone">WhatsApp</label>
+            <input type="tel" id="lf-telefone" name="telefone" required autocomplete="tel" placeholder="(55) 99999-9999" />
+          </div>
+          <div class="lead-form__field">
+            <label for="lf-email">E-mail</label>
+            <input type="email" id="lf-email" name="email" required autocomplete="email" placeholder="voce@email.com" />
+          </div>
+        </div>
+        <button type="submit" class="btn btn--primary btn--lg lead-form__submit">Quero minha avaliação grátis</button>
+        <p class="lead-form__note">Ao enviar, você fala direto com a gente no WhatsApp.</p>
+      </form>
+    </div>
+  </div>
+
   <header class="nav">
     <div class="container nav__inner">
       <a href="#" class="nav__logo" aria-label="Franzzz Co. — início">
@@ -86,7 +123,7 @@
         <a href="#servicos">Serviços</a>
         <a href="#diferencial">Diferencial</a>
         <a href="#regiao">Região</a>
-        <a href="#contato" class="nav__cta">Fale conosco</a>
+        <a href="#" class="nav__cta" data-open-lead>Avaliação grátis</a>
       </nav>
     </div>
   </header>
@@ -256,6 +293,77 @@
         }
       });
     });
+
+    /* ===== Modal de captura de leads ===== */
+    (function () {
+      var modal = document.getElementById('leadModal');
+      var form = document.getElementById('leadForm');
+      if (!modal) return;
+      var WA_NUMBER = '5555991404483';
+
+      function openModal() {
+        modal.removeAttribute('hidden');
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(function () { modal.classList.add('is-open'); });
+        var first = document.getElementById('lf-nome');
+        if (first) setTimeout(function () { first.focus(); }, 300);
+      }
+      function closeModal() {
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+        setTimeout(function () { modal.setAttribute('hidden', ''); }, 300);
+      }
+
+      // Abre automático ao entrar (1x por sessão), com pequeno atraso
+      if (!sessionStorage.getItem('leadSeen')) {
+        setTimeout(function () {
+          openModal();
+          sessionStorage.setItem('leadSeen', '1');
+        }, 700);
+      }
+
+      // Gatilhos pra abrir manualmente
+      document.querySelectorAll('[data-open-lead]').forEach(function (el) {
+        el.addEventListener('click', function (e) { e.preventDefault(); openModal(); });
+      });
+      // Fechar
+      modal.querySelectorAll('[data-close]').forEach(function (el) {
+        el.addEventListener('click', closeModal);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+      });
+
+      // Envio: monta mensagem no WhatsApp + evento no Analytics
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        var nome = document.getElementById('lf-nome').value.trim();
+        var empresa = document.getElementById('lf-empresa').value.trim();
+        var instagram = document.getElementById('lf-instagram').value.trim();
+        var telefone = document.getElementById('lf-telefone').value.trim();
+        var email = document.getElementById('lf-email').value.trim();
+
+        var msg = 'Oi! Quero minha *avaliação gratuita do Instagram*.\n\n'
+          + 'Nome: ' + nome + '\n'
+          + 'Empresa: ' + empresa + '\n'
+          + 'Instagram: ' + instagram + '\n'
+          + 'WhatsApp: ' + telefone + '\n'
+          + 'E-mail: ' + email;
+
+        if (typeof gtag === 'function') {
+          gtag('event', 'generate_lead', {
+            event_category: 'form',
+            event_label: 'avaliacao_instagram',
+            value: 1
+          });
+        }
+
+        window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
+        closeModal();
+        form.reset();
+      });
+    })();
   </script>
 
 </body>
