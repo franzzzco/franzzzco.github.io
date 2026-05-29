@@ -16,6 +16,8 @@
   --radius: 16px;
   --radius-lg: 24px;
   --container: 1180px;
+  --font-head: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Poppins', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,13 +25,29 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-body);
   color: var(--text);
   background: var(--white);
-  line-height: 1.55;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+h1, h2, h3,
+.eyebrow,
+.section-eyebrow,
+.hero__title,
+.section-title,
+.service-card h3,
+.cta-final h2,
+.btn,
+.nav__links a,
+.chip,
+.trust__item strong,
+.differentiator__list strong,
+.check {
+  font-family: var(--font-head);
 }
 
 img, svg { display: block; max-width: 100%; }
