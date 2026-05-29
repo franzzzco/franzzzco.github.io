@@ -76,32 +76,26 @@ a { color: inherit; text-decoration: none; }
 .nav__logo {
   display: flex;
   align-items: center;
-  gap: 10px;
   font-weight: 800;
+  transition: opacity 0.2s ease;
 }
 
-.logo-mark {
-  width: 38px;
-  height: 38px;
-  background: var(--purple);
-  color: var(--white);
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  font-weight: 900;
-  font-size: 20px;
-  box-shadow: 0 4px 14px rgba(123, 40, 218, 0.35);
+.nav__logo:hover { opacity: 0.78; }
+
+.brand-logo {
+  display: block;
+  width: auto;
+  object-fit: contain;
 }
 
-.logo-mark--sm { width: 32px; height: 32px; font-size: 17px; border-radius: 8px; }
+.brand-logo--nav { height: 44px; }
 
-.logo-text {
-  font-size: 18px;
-  letter-spacing: -0.02em;
-  color: var(--dark);
+.brand-logo--footer { height: 56px; }
+
+@media (max-width: 640px) {
+  .brand-logo--nav { height: 38px; }
+  .brand-logo--footer { height: 48px; }
 }
-.logo-text span { color: var(--purple); }
-.logo-text--sm { font-size: 16px; }
 
 .nav__links {
   display: flex;
