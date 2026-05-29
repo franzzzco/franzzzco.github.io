@@ -319,6 +319,75 @@
       <script async src="//www.instagram.com/embed.js"></script>
     </section>
 
+    <section class="faq" id="faq">
+      <div class="container">
+        <span class="section-eyebrow">Tira-dúvidas</span>
+        <h2 class="section-title">Perguntas que <span class="gradient-text">todo mundo faz</span> antes de começar.</h2>
+
+        <div class="faq__reassure">
+          <span class="faq__badge">Sem fidelidade</span>
+          <span class="faq__badge">Primeira conversa sem compromisso</span>
+          <span class="faq__badge">Você fala direto comigo</span>
+        </div>
+
+        <div class="faq__list">
+          <details class="faq-item">
+            <summary>Quanto custa pra trabalhar com vocês?</summary>
+            <div class="faq-item__body">
+              <p>O investimento tem duas partes: o <strong>valor da gestão</strong> (meu trabalho de estratégia, criativos e otimização) e a <strong>verba de mídia</strong> (o que vai direto pros anúncios no Meta e no Google). Não trabalho com pacote engessado — monto um plano que cabe no momento do seu negócio. Na primeira conversa eu te passo os valores com transparência, sem pegadinha.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Em quanto tempo eu vejo resultado?</summary>
+            <div class="faq-item__body">
+              <p>Os primeiros 30 a 60 dias são de teste e ajuste — é quando a gente descobre o que funciona pro seu público. Os primeiros contatos costumam aparecer já nas primeiras semanas, mas resultado consistente vem entre 60 e 90 dias. Marketing sério não é mágica: é processo com método.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Tem fidelidade ou contrato de longo prazo?</summary>
+            <div class="faq-item__body">
+              <p>Não. Nada de fidelidade longa nem multa abusiva. A ideia é você continuar porque está dando resultado — não porque está preso num contrato. Se a parceria não fizer sentido pra você, não faz sentido pra mim também.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Funciona pro meu nicho de negócio?</summary>
+            <div class="faq-item__body">
+              <p>A estratégia muda de negócio pra negócio, mas o método funciona pra quem vende produto ou serviço — principalmente negócio local. Na primeira conversa eu analiso seu caso e te digo com sinceridade se faz sentido. Se eu achar que não vou conseguir te entregar resultado, eu falo.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Preciso ter um Instagram grande ou muita verba pra começar?</summary>
+            <div class="faq-item__body">
+              <p>Não. A gente não vive de seguidor, vive de venda — dá pra começar com perfil pequeno e verba enxuta, escalando conforme o retorno aparece. Melhor começar com cabeça e crescer com dados do que gastar muito no escuro.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Vocês criam os anúncios ou eu preciso mandar tudo pronto?</summary>
+            <div class="faq-item__body">
+              <p>A gente cria tudo: design, texto e a estratégia do anúncio. Você não precisa entender de tráfego nem de design — é só me contar sobre o seu negócio que o resto fica comigo.</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="ask-box">
+          <div class="ask-box__head">
+            <span class="ask-box__icon" aria-hidden="true">?</span>
+            <div>
+              <h3>Ficou com outra dúvida?</h3>
+              <p>Manda sua pergunta aqui que eu te respondo pessoalmente.</p>
+            </div>
+          </div>
+          <form class="ask-form" id="askForm" novalidate>
+            <textarea id="ask-question" name="pergunta" rows="3" required placeholder="Escreve sua dúvida aqui..."></textarea>
+            <input type="text" id="ask-contact" name="contato" placeholder="Seu WhatsApp ou e-mail (pra eu te responder)" />
+            <input type="checkbox" name="botcheck" id="ask-botcheck" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" aria-hidden="true" />
+            <button type="submit" class="btn btn--primary ask-form__submit">Enviar pergunta</button>
+            <p class="ask-form__feedback" id="askFeedback" role="status" hidden></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
     <section class="cta-final" id="contato">
       <div class="container cta-final__inner">
         <h2>Bora fazer seu negócio parecer <span class="gradient-text">o que ele realmente é</span>?</h2>
@@ -461,6 +530,59 @@
         window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
         closeModal();
         form.reset();
+      });
+    })();
+
+    /* ===== Caixinha de pergunta (FAQ) ===== */
+    (function () {
+      var form = document.getElementById('askForm');
+      if (!form) return;
+      var WEB3FORMS_KEY = '6f733041-e934-4597-9447-5988928e5f0c';
+      var feedback = document.getElementById('askFeedback');
+
+      function showFeedback(text) {
+        feedback.textContent = text;
+        feedback.removeAttribute('hidden');
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var pergunta = document.getElementById('ask-question').value.trim();
+        if (!pergunta) { document.getElementById('ask-question').focus(); return; }
+        var contato = document.getElementById('ask-contact').value.trim();
+        var botcheck = document.getElementById('ask-botcheck');
+        var btn = form.querySelector('.ask-form__submit');
+        if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
+
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject: 'Nova dúvida enviada pelo site',
+            from_name: 'Site Franzzz Co.',
+            pergunta: pergunta,
+            contato: contato || '(não informado)',
+            botcheck: botcheck ? botcheck.checked : false
+          })
+        }).then(function (r) { return r.json(); })
+          .then(function (j) {
+            if (j && j.success) {
+              if (typeof gtag === 'function') {
+                gtag('event', 'generate_lead', { event_category: 'form', event_label: 'duvida_faq', value: 1 });
+              }
+              form.reset();
+              showFeedback('Recebido! 💜 Logo eu te respondo.');
+              if (btn) { btn.style.display = 'none'; }
+            } else {
+              showFeedback('Ops, não consegui enviar agora. Tenta de novo ou chama no WhatsApp.');
+              if (btn) { btn.disabled = false; btn.textContent = 'Enviar pergunta'; }
+            }
+          })
+          .catch(function () {
+            showFeedback('Ops, não consegui enviar agora. Tenta de novo ou chama no WhatsApp.');
+            if (btn) { btn.disabled = false; btn.textContent = 'Enviar pergunta'; }
+          });
       });
     })();
   </script>
