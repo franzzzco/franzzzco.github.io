@@ -519,6 +519,41 @@ a { color: inherit; text-decoration: none; }
   border-style: dashed;
 }
 
+/* ============ INSTAGRAM ============ */
+.instagram-section {
+  padding: 110px 0;
+  background: var(--light-2);
+  text-align: center;
+}
+
+.instagram-section__lead {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 560px;
+  margin: 0 auto 48px;
+}
+
+.instagram-feed {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 22px;
+}
+
+.instagram-feed .instagram-media {
+  margin: 0 !important;
+  min-width: 0 !important;
+  width: 326px !important;
+  max-width: 100% !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+.instagram-section__cta {
+  margin-top: 48px;
+}
+
 /* ============ CTA FINAL ============ */
 .cta-final {
   padding: 120px 0;
