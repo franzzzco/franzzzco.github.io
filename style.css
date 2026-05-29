@@ -153,10 +153,38 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   padding: 90px 0 110px;
   overflow: hidden;
-  background: var(--light);
+  background-color: var(--dark);
+  background-image:
+    linear-gradient(rgba(28, 27, 31, 0.6), rgba(28, 27, 31, 0.6)),
+    url('hero-franzzz.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .hero__inner { position: relative; z-index: 2; max-width: 880px; }
+
+/* textos do hero sobre fundo escuro */
+.hero .hero__title { color: var(--white); }
+.hero .hero__lead { color: rgba(255, 255, 255, 0.82); }
+.hero .gradient-text {
+  background: linear-gradient(110deg, var(--purple-light) 0%, #c79bff 50%, var(--purple-light) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero .hero__trust { border-top-color: rgba(255, 255, 255, 0.18); }
+.hero .trust__item strong { color: var(--white); }
+.hero .trust__item span { color: rgba(255, 255, 255, 0.7); }
+.hero .btn--ghost {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.hero .btn--ghost:hover {
+  border-color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+}
 
 .eyebrow {
   display: inline-block;
