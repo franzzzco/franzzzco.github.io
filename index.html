@@ -108,6 +108,8 @@
             <input type="email" id="lf-email" name="email" required autocomplete="email" placeholder="voce@email.com" />
           </div>
         </div>
+        <!-- Anti-spam (honeypot): fica escondido; só robôs preenchem -->
+        <input type="checkbox" name="botcheck" id="lf-botcheck" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" aria-hidden="true" />
         <button type="submit" class="btn btn--primary btn--lg lead-form__submit">Quero minha avaliação grátis</button>
         <p class="lead-form__note">Ao enviar, você fala direto com a gente no WhatsApp.</p>
       </form>
@@ -301,6 +303,10 @@
       if (!modal) return;
       var WA_NUMBER = '5555991404483';
 
+      // Web3Forms: cole aqui a Access Key que chega no seu e-mail (franzzzvisualco@gmail.com)
+      // Enquanto estiver "COLE_SUA_ACCESS_KEY_AQUI", o lead vai só pro WhatsApp.
+      var WEB3FORMS_KEY = 'COLE_SUA_ACCESS_KEY_AQUI';
+
       function openModal() {
         modal.removeAttribute('hidden');
         document.body.style.overflow = 'hidden';
@@ -357,6 +363,26 @@
             event_label: 'avaliacao_instagram',
             value: 1
           });
+        }
+
+        // Salva o lead no e-mail via Web3Forms (não bloqueia o WhatsApp)
+        if (WEB3FORMS_KEY && WEB3FORMS_KEY !== 'COLE_SUA_ACCESS_KEY_AQUI') {
+          var botcheck = document.getElementById('lf-botcheck');
+          fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              access_key: WEB3FORMS_KEY,
+              subject: 'Novo lead do site — avaliação grátis do Instagram',
+              from_name: 'Site Franzzz Co.',
+              nome: nome,
+              empresa: empresa,
+              instagram: instagram,
+              telefone: telefone,
+              email: email,
+              botcheck: botcheck ? botcheck.checked : false
+            })
+          }).catch(function () { /* silencioso: WhatsApp segue normal */ });
         }
 
         window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
