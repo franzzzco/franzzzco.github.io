@@ -155,7 +155,7 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
   background-color: var(--dark);
   background-image:
-    linear-gradient(rgba(28, 27, 31, 0.78), rgba(28, 27, 31, 0.78)),
+    linear-gradient(rgba(28, 27, 31, 0.9), rgba(28, 27, 31, 0.9)),
     url('hero-franzzz.jpg');
   background-size: cover;
   background-position: center;
