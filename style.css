@@ -672,6 +672,11 @@ a { color: inherit; text-decoration: none; }
   text-align: center;
 }
 
+.instagram-section .section-title {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .instagram-section__lead {
   font-size: 1.1rem;
   color: var(--text-muted);
