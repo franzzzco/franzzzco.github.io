@@ -621,6 +621,54 @@
         loadEmbed();
       }
     })();
+
+    /* ===== Testes A/B (integrado ao GA4) =====
+       Como criar um teste novo: adicione um item em "experiments" abaixo.
+       Cada teste sorteia 50/50 entre as variantes, lembra a escolha do
+       visitante (localStorage) e manda a variante pro GA4 como user_property
+       (ex.: ab_hero_cta = A ou B) e como evento "experiment_impression".
+       No GA4, registre essa user_property como Dimensão personalizada pra
+       comparar a taxa de conversão (generate_lead) entre A e B. */
+    (function () {
+      if (!window.localStorage) return;
+
+      function setLabel(el, text) {
+        for (var i = 0; i < el.childNodes.length; i++) {
+          var n = el.childNodes[i];
+          if (n.nodeType === 3 && n.textContent.trim()) { n.nodeValue = text + ' '; return; }
+        }
+        el.insertBefore(document.createTextNode(text + ' '), el.firstChild);
+      }
+
+      // ---- Defina seus experimentos aqui ----
+      var experiments = {
+        // TESTE 1: texto do botão principal do hero (WhatsApp)
+        hero_cta: {
+          variants: { A: 'Falar no WhatsApp', B: 'Quero uma avaliação grátis' },
+          apply: function (label) {
+            var btn = document.querySelector('.hero .btn--primary');
+            if (btn) setLabel(btn, label);
+          }
+        }
+      };
+
+      Object.keys(experiments).forEach(function (name) {
+        var exp = experiments[name];
+        var keys = Object.keys(exp.variants);
+        var storeKey = 'ab_' + name;
+        var variant = localStorage.getItem(storeKey);
+        if (!variant || keys.indexOf(variant) === -1) {
+          variant = keys[Math.floor(Math.random() * keys.length)];
+          localStorage.setItem(storeKey, variant);
+        }
+        try { exp.apply(exp.variants[variant]); } catch (e) {}
+        if (typeof gtag === 'function') {
+          var up = {}; up[storeKey] = variant;
+          gtag('set', 'user_properties', up);
+          gtag('event', 'experiment_impression', { experiment: name, variant: variant });
+        }
+      });
+    })();
   </script>
 
 </body>
