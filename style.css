@@ -658,6 +658,14 @@ a { color: inherit; text-decoration: none; }
   font-size: 1.1rem;
   color: var(--text-muted);
   line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.about__bio:last-of-type { margin-bottom: 0; }
+
+.about__bio--highlight {
+  color: var(--dark);
+  margin-top: 8px;
 }
 
 @media (max-width: 768px) {
