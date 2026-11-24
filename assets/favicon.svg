@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Franzzz Co.</title>
+  <rect width="64" height="64" rx="13" fill="#2c2930"/>
+  <g fill="#d8cffb" transform="skewX(-13)">
+    <path d="M12 15h15v5H18v5h8v5h-8v18h-6z"/>
+    <path d="M29 15h15v5H35v5h8v5h-8v18h-6z"/>
+    <path d="M46 15h15v5H52v5h8v5h-8v18h-6z"/>
+  </g>
+</svg>
