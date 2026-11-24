@@ -1,0 +1,66 @@
+media:
+  - name: blog
+    label: Imagens do blog
+    input: assets/blog
+    output: /assets/blog
+content:
+  - name: posts
+    label: Artigos do blog
+    type: collection
+    path: _posts
+    filename: "{year}-{month}-{day}-{primary}.md"
+    format: yaml-frontmatter
+    view:
+      primary: title
+      sort: date
+      order: desc
+    fields:
+      - name: title
+        label: Título do artigo
+        type: string
+        required: true
+      - name: date
+        label: Data de publicação
+        type: date
+        required: true
+      - name: category
+        label: Categoria
+        type: select
+        options:
+          values:
+            - Tráfego pago
+            - Google Ads
+            - Meta Ads
+            - Marketing digital
+            - Social media
+            - Conteúdo
+            - Negócios
+            - Branding
+      - name: excerpt
+        label: Resumo do artigo
+        type: text
+        required: true
+      - name: image
+        label: Imagem de capa
+        type: image
+      - name: image_alt
+        label: Texto alternativo da imagem
+        type: string
+      - name: author
+        label: Autor
+        type: string
+      - name: published
+        label: Publicar artigo
+        type: boolean
+      - name: body
+        label: Conteúdo do artigo
+        type: rich-text
+        required: true
+settings:
+  content: true
+  commit:
+    templates:
+      create: "blog: criar {filename}"
+      update: "blog: atualizar {filename}"
+      delete: "blog: excluir {filename}"
+      rename: "blog: renomear {oldPath} para {newPath}"
