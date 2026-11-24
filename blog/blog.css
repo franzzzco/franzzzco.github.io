@@ -75,3 +75,54 @@ body{background:var(--bg);color:var(--white)}
   .blog-hero h1 .highlight{padding:0 .12em .06em}
   .blog-hero h1 .highlight::before{inset:18% -.07em 0}
 }
+
+
+/* ===== Ajuste visual definitivo do blog — cache e identidade ===== */
+body.page-blog{background:#2c2930!important;color:#f9f6ff}
+.page-blog .site-header{background:rgba(44,41,48,.96)!important}
+.page-blog .blog-hero{
+  background:
+    radial-gradient(ellipse at 78% 8%,rgba(135,31,218,.34) 0%,rgba(135,31,218,0) 48%),
+    linear-gradient(112deg,#2c2930 0%,#33223f 62%,#3b2450 100%)!important;
+}
+.page-blog .blog-main{background:#2c2930}
+.page-blog .post-card{background:#211e25;border-color:rgba(255,255,255,.12)}
+.page-blog .site-footer{background:#211e25}
+.page-blog .brand-logo{
+  width:110px;height:auto;display:block;
+  filter:brightness(0) saturate(100%) invert(91%) sepia(12%) saturate(653%) hue-rotate(207deg) brightness(105%) contrast(101%)!important;
+}
+.page-blog .blog-hero h1 .highlight{
+  display:inline-block!important;
+  position:relative!important;
+  isolation:isolate;
+  z-index:0!important;
+  color:#fff!important;
+  font-style:italic!important;
+  font-weight:600;
+  padding:0 .14em .07em!important;
+  margin-left:-.035em;
+  background:transparent!important;
+  white-space:normal;
+}
+.page-blog .blog-hero h1 .highlight::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:18% -.075em 0!important;
+  background:linear-gradient(100deg,#871fda 0%,#a641e8 100%)!important;
+  transform:skew(-9deg)!important;
+  z-index:-1!important;
+  border-radius:1px;
+}
+.page-blog .article-hero{
+  background:
+    radial-gradient(ellipse at 80% 5%,rgba(135,31,218,.28),transparent 48%),
+    linear-gradient(115deg,#2c2930,#34223f)!important;
+}
+@media(max-width:680px){
+  .page-blog .brand-logo{width:90px}
+  .page-blog .blog-hero{padding:72px 0 55px}
+  .page-blog .blog-hero h1 .highlight{padding:0 .14em .075em!important}
+  .page-blog .blog-hero h1 .highlight::before{inset:18% -.07em 0!important}
+}
