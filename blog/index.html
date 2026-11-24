@@ -1,0 +1,37 @@
+---
+layout: default
+title: Blog
+description: Conteúdos sobre tráfego pago, marketing digital, conteúdo e crescimento de negócios.
+permalink: /blog/
+---
+<main>
+  <section class="blog-hero">
+    <div class="wrap">
+      <div class="eyebrow">FRANZZZ CO. / IDEIAS EM MOVIMENTO</div>
+      <h1>Conhecimento que<br><em>move negócios.</em></h1>
+      <p>Reflexões, estratégias e aprendizados sobre marketing, tráfego pago e comunicação para quem quer fazer o negócio avançar.</p>
+    </div>
+  </section>
+  <section class="blog-main wrap">
+    <div class="section-head"><div><h2>Últimos artigos</h2><p>Conteúdo para entender melhor o que faz seu negócio crescer.</p></div><span class="blog-meta">{{ site.posts | size }} artigos</span></div>
+    {% assign visible_posts = site.posts | where: "published", true %}
+    {% if visible_posts.size > 0 %}
+    <div class="post-grid">
+      {% for post in visible_posts %}
+      <article class="post-card">
+        <a href="{{ post.url }}"><img class="post-image" src="{{ post.image | default: '/assets/blog/blog-placeholder.svg' | relative_url }}" alt="{{ post.image_alt | default: post.title | escape }}" loading="lazy"></a>
+        <div class="post-content">
+          <span class="category">{{ post.category | default: "Marketing" }}</span>
+          <h3><a href="{{ post.url }}">{{ post.title | escape }}</a></h3>
+          <p>{{ post.excerpt | strip_html | truncate: 145 }}</p>
+          <span class="post-date">{{ post.date | date: "%d/%m/%Y" }}</span>
+          <a class="read-link" href="{{ post.url }}">Ler artigo ↗</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state"><strong>Estamos preparando os primeiros artigos.</strong><br>Em breve, este espaço terá conteúdos práticos sobre marketing, anúncios e crescimento de negócios.</div>
+    {% endif %}
+  </section>
+</main>

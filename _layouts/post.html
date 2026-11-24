@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<main>
+  <section class="article-hero">
+    <div class="wrap">
+      <div class="blog-meta"><a href="/blog/">BLOG</a><span>/</span><span>{{ page.category | default: "Marketing" }}</span><span>/</span><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d/%m/%Y" }}</time></div>
+      <h1>{{ page.title | escape }}</h1>
+      {% if page.excerpt %}<p class="excerpt">{{ page.excerpt | escape }}</p>{% endif %}
+      {% if page.image %}<img class="article-cover" src="{{ page.image | relative_url }}" alt="{{ page.image_alt | default: page.title | escape }}">{% endif %}
+    </div>
+  </section>
+  <div class="article-layout wrap">
+    <article class="article-body">{{ content }}</article>
+    <aside class="article-aside"><strong>FRANZZZ CO.</strong>Conteúdo sobre tráfego pago, marketing e comunicação para negócios.<a class="back-link" href="/blog/">← Voltar ao blog</a></aside>
+  </div>
+</main>
