@@ -4,14 +4,48 @@ layout: default
 <main>
   <section class="article-hero">
     <div class="wrap">
-      <div class="blog-meta"><a href="/blog/">BLOG</a><span>/</span><span>{{ page.category | default: "Marketing" }}</span><span>/</span><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d/%m/%Y" }}</time></div>
+      <div class="blog-meta"><a href="{{ '/blog/' | relative_url }}">BLOG</a><span>/</span><span>{{ page.category | default: "Marketing" }}</span><span>/</span><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d/%m/%Y" }}</time></div>
       <h1>{{ page.title | escape }}</h1>
       {% if page.excerpt %}<p class="excerpt">{{ page.excerpt | escape }}</p>{% endif %}
       {% if page.image %}<img class="article-cover" src="{{ page.image | relative_url }}" alt="{{ page.image_alt | default: page.title | escape }}">{% endif %}
     </div>
   </section>
   <div class="article-layout wrap">
-    <article class="article-body">{{ content }}</article>
-    <aside class="article-aside"><strong>FRANZZZ CO.</strong>Conteúdo sobre tráfego pago, marketing e comunicação para negócios.<a class="back-link" href="/blog/">← Voltar ao blog</a></aside>
+    <article class="article-body">
+      {% if page.sections and page.sections.size > 0 %}
+        {% for section in page.sections %}
+          {% case section.type %}
+            {% when "text" %}
+              <div class="content-block content-text">{{ section.body }}</div>
+            {% when "heading" %}
+              {% if section.level == "H3" %}<h3 class="content-heading">{{ section.text | escape }}</h3>{% else %}<h2 class="content-heading">{{ section.text | escape }}</h2>{% endif %}
+            {% when "image" %}
+              {% assign image_size = section.size | downcase | default: "grande" %}
+              <figure class="content-image content-image--{{ image_size }}">
+                <img src="{{ section.src | relative_url }}" alt="{{ section.alt | default: section.caption | default: page.title | escape }}" loading="lazy">
+                {% if section.caption %}<figcaption>{{ section.caption | escape }}</figcaption>{% endif %}
+              </figure>
+            {% when "list" %}
+              {% if section.style == "Numerada" %}<ol class="content-list">{% else %}<ul class="content-list">{% endif %}
+                {% for item in section.items %}<li>{{ item | escape }}</li>{% endfor %}
+              {% if section.style == "Numerada" %}</ol>{% else %}</ul>{% endif %}
+            {% when "quote" %}
+              <blockquote class="content-quote"><p>{{ section.text | escape }}</p>{% if section.author %}<cite>{{ section.author | escape }}</cite>{% endif %}</blockquote>
+            {% when "callout" %}
+              <aside class="content-callout">{% if section.title %}<h3>{{ section.title | escape }}</h3>{% endif %}<div>{{ section.body }}</div></aside>
+            {% when "divider" %}
+              <hr class="content-divider">
+            {% when "spacer" %}
+              {% assign spacer_size = section.size | downcase | default: "medio" %}
+              <div class="content-spacer content-spacer--{{ spacer_size }}" aria-hidden="true"></div>
+            {% when "button" %}
+              <p class="content-button-wrap"><a class="content-button" href="{{ section.url | escape }}">{{ section.label | escape }} ↗</a></p>
+          {% endcase %}
+        {% endfor %}
+      {% else %}
+        {{ content }}
+      {% endif %}
+    </article>
+    <aside class="article-aside"><strong>FRANZZZ CO.</strong>Conteúdo sobre tráfego pago, marketing e comunicação para negócios.<a class="back-link" href="{{ '/blog/' | relative_url }}">← Voltar ao blog</a></aside>
   </div>
 </main>
