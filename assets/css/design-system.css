@@ -1,0 +1,22 @@
+/* Franzzz Co. shared design system — reference: homepage */
+:root{--fz-bg:#2c2930;--fz-dark:#211e25;--fz-purple:#871fda;--fz-lilac:#d8cffb;--fz-white:#f9f6ff;--fz-muted:#bcb5c7;--fz-line:#ffffff20;--fz-font-display:'Inter',Arial,sans-serif;--fz-font-body:'Helvetica Neue',Helvetica,'Inter',Arial,sans-serif;--fz-text:16px;--fz-leading:1.65;--fz-section-space:clamp(64px,8vw,112px);--fz-h1:clamp(29px,3.8vw,54px);--fz-h2:clamp(32px,3.65vw,53px);--fz-h3:clamp(20px,2vw,26px);--fz-eyebrow:10px;--fz-eyebrow-weight:600;--fz-eyebrow-track:.17em;--fz-card-radius:8px;--fz-content-width:1200px}
+body{font-family:var(--fz-font-body)}
+h1,h2,h3{font-family:var(--fz-font-display)}
+.page-cases{font-size:var(--fz-text);line-height:var(--fz-leading)}
+.page-cases .hero h1{font-size:var(--fz-h1);font-weight:600;line-height:1.13;letter-spacing:-.055em}
+.page-cases .section-head h2,.page-cases .clarity h2{font-size:var(--fz-h2);font-weight:600;line-height:1.12;letter-spacing:-.055em}
+.page-cases .eyebrow{font-size:var(--fz-eyebrow);font-weight:var(--fz-eyebrow-weight);letter-spacing:var(--fz-eyebrow-track);line-height:1.6}
+.page-cases .section{padding-block:var(--fz-section-space)}
+.page-cases p{line-height:var(--fz-leading)}
+.page-blog{font-size:var(--fz-text);line-height:var(--fz-leading)}
+.page-blog .blog-hero{padding-block:clamp(64px,8vw,100px) clamp(44px,6vw,70px)}
+.page-blog .blog-hero h1,.page-blog .article-hero h1{font-size:var(--fz-h1);font-weight:600;line-height:1.13;letter-spacing:-.055em}
+.page-blog .section-head h2{font-size:var(--fz-h2);font-weight:600;line-height:1.12;letter-spacing:-.055em}
+.page-blog .eyebrow,.page-blog .category{font-size:var(--fz-eyebrow);font-weight:var(--fz-eyebrow-weight);letter-spacing:var(--fz-eyebrow-track)}
+.page-blog .article-body{font-family:var(--fz-font-body);font-size:var(--fz-text);line-height:1.75}
+.page-blog .article-body h2{font-size:clamp(25px,2.8vw,34px);font-weight:600;line-height:1.2;letter-spacing:-.045em}
+.page-blog .article-body h3{font-size:var(--fz-h3);font-weight:600;line-height:1.25;letter-spacing:-.035em}
+.page-blog .article-body p{margin-bottom:1.25em}
+.page-blog .post-card,.page-blog .content-callout{border-radius:var(--fz-card-radius)}
+.page-blog img{max-width:100%;height:auto}
+@media(max-width:760px){.page-cases .section{padding-block:64px}.page-cases .hero h1{font-size:clamp(29px,7.5vw,42px)}.page-blog .blog-hero h1,.page-blog .article-hero h1{font-size:clamp(29px,8vw,42px)}.page-blog .article-body{font-size:16px;line-height:1.75}}
