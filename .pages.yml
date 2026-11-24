@@ -3,10 +3,11 @@ media:
     label: Imagens do blog
     input: assets/blog
     output: /assets/blog
+
 content:
   - name: posts
     label: Artigos do blog
-    type: block
+    type: collection
     path: _posts
     filename: "{year}-{month}-{day}-{primary}.md"
     format: yaml-frontmatter
@@ -52,10 +53,127 @@ content:
       - name: published
         label: Publicar artigo
         type: boolean
+      - name: sections
+        label: Conteúdo por blocos
+        description: Adicione blocos na ordem em que devem aparecer. O campo antigo abaixo continua disponível para artigos já existentes.
+        type: block
+        list: true
+        blockKey: type
+        blocks:
+          - name: text
+            label: Parágrafo
+            fields:
+              - name: body
+                label: Texto
+                type: rich-text
+                required: true
+          - name: heading
+            label: Título ou subtítulo
+            fields:
+              - name: text
+                label: Texto do título
+                type: string
+                required: true
+              - name: level
+                label: Hierarquia
+                type: select
+                options:
+                  values:
+                    - H2
+                    - H3
+          - name: image
+            label: Imagem
+            fields:
+              - name: src
+                label: Imagem
+                type: image
+                required: true
+              - name: alt
+                label: Texto alternativo
+                type: string
+              - name: caption
+                label: Legenda
+                type: string
+              - name: size
+                label: Largura
+                type: select
+                options:
+                  values:
+                    - Pequena
+                    - Média
+                    - Grande
+          - name: list
+            label: Lista
+            fields:
+              - name: style
+                label: Tipo de lista
+                type: select
+                options:
+                  values:
+                    - Marcadores
+                    - Numerada
+              - name: items
+                label: Itens
+                type: string
+                list: true
+                required: true
+          - name: quote
+            label: Citação ou destaque
+            fields:
+              - name: text
+                label: Texto
+                type: text
+                required: true
+              - name: author
+                label: Fonte ou autoria
+                type: string
+          - name: callout
+            label: Caixa de destaque
+            fields:
+              - name: title
+                label: Título
+                type: string
+              - name: body
+                label: Texto
+                type: rich-text
+                required: true
+          - name: divider
+            label: Divisor
+            fields:
+              - name: style
+                label: Estilo
+                type: select
+                options:
+                  values:
+                    - Linha discreta
+                    - Espaço com linha
+          - name: spacer
+            label: Espaçamento
+            fields:
+              - name: size
+                label: Altura
+                type: select
+                options:
+                  values:
+                    - Pequeno
+                    - Médio
+                    - Grande
+          - name: button
+            label: Botão ou link
+            fields:
+              - name: label
+                label: Texto do link
+                type: string
+                required: true
+              - name: url
+                label: Endereço do link
+                type: string
+                required: true
       - name: body
-        label: Conteúdo do artigo
+        label: Conteúdo antigo (artigos já existentes)
+        description: Campo legado. Novos artigos devem usar Conteúdo por blocos.
         type: rich-text
-        required: true
+
 settings:
   content: true
   commit:
