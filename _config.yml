@@ -1,0 +1,26 @@
+title: Franzzz Co.
+description: Ideias, análises e conteúdos sobre tráfego pago, marketing digital e comunicação para negócios.
+url: "https://franzzzco.github.io"
+baseurl: ""
+lang: pt-BR
+timezone: America/Sao_Paulo
+markdown: kramdown
+permalink: /blog/:title/
+exclude:
+  - README.md
+  - READme.txt
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      permalink: /blog/:title/
+      image: /assets/blog/blog-placeholder.svg
+      image_alt: "Imagem ilustrativa do artigo"
+      category: Marketing
+      author: Franzzz Co.
+      published: true
