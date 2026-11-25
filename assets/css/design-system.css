@@ -40,3 +40,8 @@ h1,h2,h3{font-family:var(--fz-font-display)}
   .page-blog .blog-main{padding-block:65px}
   .page-blog .article-body{font-size:16px;line-height:1.75}
 }
+
+
+/* Home: mesmo tamanho de título usado nas aberturas de Cases e Blog. */
+.hero h1{font-size:var(--fz-h1);font-weight:600;line-height:1.04;letter-spacing:-.065em}
+@media(max-width:760px){.hero h1{font-size:clamp(49px,11.5vw,77px);line-height:1.04;letter-spacing:-.065em}}
