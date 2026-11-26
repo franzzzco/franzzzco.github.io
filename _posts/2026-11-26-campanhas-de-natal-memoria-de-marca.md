@@ -10,17 +10,16 @@ image_alt: Campanhas de Natal e construção de memória de marca
 author: Franzzz Co.
 published: true
 sections:
-  - type: heading
-    text: Por que as campanhas de Natal importam para a memória da sua marca?
-    level: H2
   - type: text
     body: >+
       > Em resumo: Este artigo mostra por que tratar o Natal apenas como uma
       liquidação de fim de ano desperdiça a maior oportunidade emocional do
       calendário. 
 
-      >
-
+  - type: spacer
+    size: Pequeno
+  - type: text
+    body: >+
       > Analisamos o que torna campanhas icônicas — como as da Coca-Cola, John
       Lewis e O Boticário — inesquecíveis e apresentamos três caminhos práticos
       para empresas regionais construírem memória de marca em dezembro que gera
@@ -33,6 +32,8 @@ sections:
       mesmo: vitrines cheias de etiquetas vermelhas, anúncios gritando descontos
       de última hora e uma corrida desesperada para bater a meta de dezembro
       antes que o ano acabe."
+  - type: spacer
+    size: Pequeno
   - type: text
     body: O problema dessa abordagem exclusivamente promocional aparece em janeiro.
       Quando uma empresa passa o mês inteiro falando apenas de preço e
@@ -43,7 +44,7 @@ sections:
     size: Grande
   - type: heading
     text: O que as grandes marcas entendem sobre dezembro
-    level: H3
+    level: H2
   - type: text
     body: Existe um motivo pelo qual as maiores empresas do mundo investem suas
       verbas mais nobres em campanhas de Natal que, muitas vezes, nem sequer
@@ -77,7 +78,7 @@ sections:
     size: Médio
   - type: heading
     text: Como aplicar essa lógica fora do orçamento das multinacionais?
-    level: H3
+    level: H2
   - type: text
     body: >+
       Você não precisa de milhões de reais nem de uma superprodução
@@ -94,7 +95,7 @@ sections:
     size: Médio
   - type: heading
     text: "1. Conte histórias reais da sua comunidade e dos seus clientes  "
-    level: H2
+    level: H3
   - type: text
     body: >-
       Em vez de usar fotos genéricas de banco de imagens com gorros de Papai
@@ -106,7 +107,7 @@ sections:
       identificação muito mais profunda do que qualquer banner de desconto.
   - type: heading
     text: 2. Crie rituais e experiências sensoriais na entrega
-    level: H2
+    level: H3
   - type: text
     body: >-
       A memória de marca mora nos detalhes que o cliente não espera. 
@@ -118,7 +119,7 @@ sections:
       lembrança positiva dentro da casa do cliente.
   - type: heading
     text: 3. Use o Natal para plantar sementes para o primeiro trimestre
-    level: H2
+    level: H3
   - type: text
     body: >-
       Quando você entrega uma experiência memorável em dezembro, o cliente
@@ -133,7 +134,7 @@ sections:
     size: Médio
   - type: heading
     text: O lucro que aparece depois de janeiro
-    level: H3
+    level: H2
   - type: text
     body: "Vender bem em dezembro é importante para fechar o caixa do ano, mas usar
       o Natal para fixar a sua marca na cabeça do consumidor é o que garante
