@@ -49,18 +49,24 @@ sections:
     body: Existe um motivo pelo qual as maiores empresas do mundo investem suas
       verbas mais nobres em campanhas de Natal que, muitas vezes, nem sequer
       mostram o preço de um produto.
+  - type: spacer
+    size: Médio
   - type: text
     body: >+
       Pense na Coca-Cola, que há décadas associa a marca à união familiar e à
       chegada do Papai Noel com seus caminhões iluminados — uma estratégia tão
       forte que moldou o imaginário visual da data no mundo inteiro. 
 
+  - type: spacer
+    size: Pequeno
   - type: text
     body: >+
       Ou observe os comerciais anuais da loja britânica John Lewis, que viraram
       um evento cultural aguardado todos os anos por contarem histórias humanas
       sobre empatia e o cuidado de escolher o presente certo para alguém. 
 
+  - type: spacer
+    size: Pequeno
   - type: text
     body: "No Brasil, campanhas de O Boticário e do Itaú seguem a mesma lógica: usam
       o reencontro, o afeto e a pausa na rotina corrida para ancorar a marca em
