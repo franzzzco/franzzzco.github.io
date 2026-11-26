@@ -25,8 +25,8 @@ sections:
       para empresas regionais construírem memória de marca em dezembro que gera
       vendas durante todo o ano seguinte.
 
-  - type: spacer
-    size: Médio
+  - type: divider
+    style: Espaço com linha
   - type: text
     body: "Todo final de novembro o roteiro no comércio e nos serviços parece o
       mesmo: vitrines cheias de etiquetas vermelhas, anúncios gritando descontos
