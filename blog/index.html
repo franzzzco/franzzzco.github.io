@@ -1,0 +1,42 @@
+---
+layout: default
+title: Blog de tráfego pago e marketing para pequenas empresas
+description: Guias práticos de Google Ads, Meta Ads e Instagram para pequenas empresas que querem mais clientes. Por Franzzz Co., agência de Ijuí – RS.
+permalink: /blog/
+---
+<main>
+  <section class="blog-hero">
+    <div class="wrap">
+      <div class="eyebrow">BLOG DA FRANZZZ CO.</div>
+      <h1>Tráfego pago e marketing<br><span class="highlight">para pequenas empresas.</span></h1>
+      <p>Guias práticos sobre Google Ads, Meta Ads e Instagram para quem tem negócio local e quer mais clientes chamando no WhatsApp.</p>
+    </div>
+  </section>
+  <section class="blog-main wrap">
+    {% assign visible_posts = site.posts | where: "published", true %}
+    <div class="section-head"><div><h2>Últimos artigos</h2><p>Respostas diretas, com exemplos reais de clientes.</p></div><span class="blog-meta">{{ visible_posts.size }} {% if visible_posts.size == 1 %}artigo{% else %}artigos{% endif %}</span></div>
+    {% if visible_posts.size > 0 %}
+    <div class="post-grid">
+      {% for post in visible_posts %}
+      <article class="post-card">
+        <a href="{{ post.url }}"><img class="post-image" src="{{ post.image | default: '/assets/blog/blog-placeholder.svg' | relative_url }}" alt="{{ post.image_alt | default: post.title | escape }}" loading="lazy"></a>
+        <div class="post-content">
+          <span class="category">{{ post.category | default: "Marketing" }}</span>
+          <h3><a href="{{ post.url }}">{{ post.title | escape }}</a></h3>
+          <p>{{ post.excerpt | strip_html | truncate: 145 }}</p>
+          <span class="post-date">{{ post.date | date: "%d/%m/%Y" }}</span>
+          <a class="read-link" href="{{ post.url }}">Ler artigo ↗</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state"><strong>Estamos preparando os primeiros artigos.</strong><br>Em breve, guias práticos sobre anúncios e Instagram para pequenas empresas.</div>
+    {% endif %}
+    <aside class="content-callout post-cta blog-cta">
+      <h3>Prefere que a gente olhe o seu caso?</h3>
+      <div><p>Fazemos uma análise gratuita dos seus anúncios ou do seu Instagram e mostramos o que mudaríamos.</p></div>
+      <p class="content-button-wrap"><a class="content-button" href="{{ '/#contato' | relative_url }}">Pedir análise gratuita ↗</a></p>
+    </aside>
+  </section>
+</main>
