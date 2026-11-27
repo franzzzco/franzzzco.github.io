@@ -47,3 +47,25 @@ document.querySelectorAll('img[data-fallback]').forEach(img=>{
   img.addEventListener('error',loadFallback,{once:true});
   if(img.complete && img.naturalWidth===0)loadFallback();
 });
+
+
+/* Progresso discreto de leitura no topo. Não interfere no scroll nem em links. */
+(() => {
+  if (motion.matches) return;
+  let ticking = false;
+  const updateProgress = () => {
+    const root = document.documentElement;
+    const max = root.scrollHeight - window.innerHeight;
+    const progress = max > 0 ? (window.scrollY / max) * 100 : 0;
+    root.style.setProperty('--page-progress', progress.toFixed(2) + '%');
+    ticking = false;
+  };
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(updateProgress);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  updateProgress();
+})();
