@@ -1,0 +1,25 @@
+---
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {% comment %} index.html e cases.html não têm front matter, então o Jekyll não os lista em site.pages. Ficam fixos aqui. {% endcomment %}
+  <url><loc>{{ site.url }}/</loc></url>
+  <url><loc>{{ site.url }}/cases.html</loc></url>
+{% assign sorted_pages = site.pages | sort: "url" %}
+{% for item in sorted_pages %}
+  {% unless item.url contains "sitemap.xml" or item.url contains "/404" or item.url contains ".css" or item.url contains ".js" or item.url contains ".txt" or item.url contains ".xml" or item.url == "/" or item.url == "/cases.html" or item.sitemap == false %}
+  <url>
+    <loc>{{ site.url }}{{ item.url | relative_url }}</loc>
+    {% if item.last_modified_at %}<lastmod>{{ item.last_modified_at | date_to_xmlschema }}</lastmod>{% endif %}
+  </url>
+  {% endunless %}
+{% endfor %}
+{% for post in site.posts %}
+  {% if post.published != false %}
+  <url>
+    <loc>{{ site.url }}{{ post.url | relative_url }}</loc>
+    <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
+  </url>
+  {% endif %}
+{% endfor %}
+</urlset>

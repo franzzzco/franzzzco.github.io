@@ -1,0 +1,26 @@
+title: Franzzz Co.
+description: Guias práticos de tráfego pago, Google Ads, Meta Ads e Instagram para pequenas empresas, da Franzzz Co., agência de Ijuí – RS.
+url: "https://franzzzco.github.io"
+baseurl: ""
+lang: pt-BR
+timezone: America/Sao_Paulo
+markdown: kramdown
+permalink: /blog/:title/
+exclude:
+  - README.md
+  - READme.txt
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      permalink: /blog/:title/
+      image: /assets/blog/blog-placeholder.svg
+      image_alt: "Imagem ilustrativa do artigo"
+      category: Marketing
+      author: Nicoly Franz
+      published: true
