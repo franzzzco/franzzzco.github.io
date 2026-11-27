@@ -7,6 +7,7 @@
   <title>{% assign seo_title = page.seo_title | default: page.title %}{% if seo_title %}{{ seo_title | escape }} | {% endif %}Franzzz Co.</title>
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | escape }}">
   <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:site_name" content="Franzzz Co.">
   <meta property="og:title" content="{{ page.title | default: site.title | escape }}">
   <meta property="og:description" content="{{ page.excerpt | default: site.description | strip_html | escape }}">
   {% if page.image %}<meta property="og:image" content="{{ page.image | absolute_url }}">{% endif %}
