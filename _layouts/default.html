@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#2c2930">
+  {% assign seo_title = page.seo_title | default: page.title %}
+  {% assign seo_description = page.description | default: page.excerpt | default: site.description | strip_html | normalize_whitespace %}
+  {% assign seo_image = page.image | default: "/assets/og-image.png" %}
+  <title>{% if seo_title %}{{ seo_title | escape }} | {% endif %}Franzzz Co.</title>
+  <meta name="description" content="{{ seo_description | escape }}">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:site_name" content="Franzzz Co.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="{{ page.title | default: site.title | escape }}">
+  <meta property="og:description" content="{{ seo_description | escape }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:image" content="{{ seo_image | absolute_url }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ seo_image | absolute_url }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/blog/blog.css?v=20261127a">
+  <link rel="stylesheet" href="/assets/css/design-system.css?v=20261126a">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=20261124f">
+  <link rel="mask-icon" href="/assets/favicon.svg?v=20261124f" color="#d8cffb">
+  {% if page.layout != 'post' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": {{ page.url | absolute_url | append: "#blog" | jsonify }},
+    "name": "Blog da Franzzz Co.",
+    "description": {{ seo_description | jsonify }},
+    "url": {{ page.url | absolute_url | jsonify }},
+    "inLanguage": "pt-BR",
+    "publisher": {
+      "@type": "ProfessionalService",
+      "@id": {{ "/#empresa" | absolute_url | jsonify }},
+      "name": "Franzzz Co.",
+      "url": {{ "/" | absolute_url | jsonify }},
+      "address": { "@type": "PostalAddress", "addressLocality": "Ijuí", "addressRegion": "RS", "addressCountry": "BR" }
+    }
+  }
+  </script>
+  {% endif %}
+</head>
+<body class="page-blog">
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Franzzz Co. início"><img class="brand-logo" src="/assets/logo.png" alt="Franzzz Co." width="110" height="45"></a>
+    <nav aria-label="Navegação principal">
+      <a href="/#servicos">O que fazemos</a><a href="/cases.html">Cases</a><a class="active" href="/blog/">Blog</a><a class="nav-contact" href="/#contato">Análise gratuita ↗</a>
+    </nav>
+  </header>
+  {{ content }}
+  <footer class="site-footer">
+    <a class="brand" href="/" aria-label="Franzzz Co. início"><img class="brand-logo" src="/assets/logo.png" alt="Franzzz Co." width="110" height="45"></a>
+    <p><strong>Franzzz Co.</strong> · Agência de tráfego pago e social media em Ijuí – RS · <a href="https://wa.me/5555991404483" target="_blank" rel="noopener noreferrer">(55) 99140-4483</a></p>
+    <a href="/#contato">Pedir análise gratuita ↗</a>
+    <small>© {{ 'now' | date: '%Y' }} Franzzz Co. Todos os direitos reservados.</small>
+  </footer>
+</body>
+</html>

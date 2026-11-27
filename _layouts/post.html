@@ -1,0 +1,97 @@
+---
+layout: default
+---
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "headline": {{ page.title | jsonify }},
+      "description": {{ page.excerpt | strip_html | normalize_whitespace | jsonify }},
+      "image": {{ page.image | default: "/assets/og-image.png" | absolute_url | jsonify }},
+      "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+      "dateModified": {{ page.last_modified_at | default: page.date | date_to_xmlschema | jsonify }},
+      "inLanguage": "pt-BR",
+      "mainEntityOfPage": {{ page.url | absolute_url | jsonify }},
+      "author": { "@type": "Person", "name": {{ page.author | default: "Nicoly Franz" | jsonify }}, "worksFor": { "@id": {{ "/#empresa" | absolute_url | jsonify }} } },
+      "publisher": { "@type": "ProfessionalService", "@id": {{ "/#empresa" | absolute_url | jsonify }}, "name": "Franzzz Co.", "logo": { "@type": "ImageObject", "url": {{ "/assets/logo.png" | absolute_url | jsonify }} } }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Início", "item": {{ "/" | absolute_url | jsonify }} },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": {{ "/blog/" | absolute_url | jsonify }} },
+        { "@type": "ListItem", "position": 3, "name": {{ page.title | jsonify }}, "item": {{ page.url | absolute_url | jsonify }} }
+      ]
+    }
+  ]
+}
+</script>
+<main>
+  <section class="article-hero">
+    <div class="wrap">
+      <div class="blog-meta"><a href="{{ '/blog/' | relative_url }}">BLOG</a><span>/</span><span>{{ page.category | default: "Marketing" }}</span><span>/</span><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d/%m/%Y" }}</time><span>/</span><span>Por {{ page.author | default: "Nicoly Franz" }}</span></div>
+      <h1>{{ page.title | escape }}</h1>
+      {% if page.excerpt %}<p class="excerpt">{{ page.excerpt | escape }}</p>{% endif %}
+      {% if page.image %}<img class="article-cover" src="{{ page.image | relative_url }}" alt="{{ page.image_alt | default: page.title | escape }}">{% endif %}
+    </div>
+  </section>
+  <div class="article-layout wrap">
+    <article class="article-body">
+      {% if page.sections and page.sections.size > 0 %}
+        {% for section in page.sections %}
+          {% case section.type %}
+            {% when "text" %}
+              <div class="content-block content-text">{{ section.body }}</div>
+            {% when "heading" %}
+              {% if section.level == "H3" %}<h3 class="content-heading">{{ section.text | escape }}</h3>{% else %}<h2 class="content-heading">{{ section.text | escape }}</h2>{% endif %}
+            {% when "image" %}
+              {% assign image_size = section.size | downcase | default: "grande" %}
+              <figure class="content-image content-image--{{ image_size }}">
+                <img src="{{ section.src | relative_url }}" alt="{{ section.alt | default: section.caption | default: page.title | escape }}" loading="lazy">
+                {% if section.caption %}<figcaption>{{ section.caption | escape }}</figcaption>{% endif %}
+              </figure>
+            {% when "list" %}
+              {% if section.style == "Numerada" %}<ol class="content-list">{% else %}<ul class="content-list">{% endif %}
+                {% for item in section.items %}<li>{{ item | escape }}</li>{% endfor %}
+              {% if section.style == "Numerada" %}</ol>{% else %}</ul>{% endif %}
+            {% when "quote" %}
+              <blockquote class="content-quote"><p>{{ section.text | escape }}</p>{% if section.author %}<cite>{{ section.author | escape }}</cite>{% endif %}</blockquote>
+            {% when "callout" %}
+              <aside class="content-callout">{% if section.title %}<h3>{{ section.title | escape }}</h3>{% endif %}<div>{{ section.body }}</div></aside>
+            {% when "divider" %}
+              <hr class="content-divider">
+            {% when "spacer" %}
+              {% assign spacer_size = section.size | downcase | default: "medio" %}
+              <div class="content-spacer content-spacer--{{ spacer_size }}" aria-hidden="true"></div>
+            {% when "button" %}
+              {% assign button_url = section.url | strip %}
+              {% assign button_prefix = button_url | slice: 0, 1 %}
+              {% if button_url contains '://' %}
+                {% assign resolved_button_url = button_url %}
+              {% elsif button_prefix == '/' or button_prefix == '#' %}
+                {% assign resolved_button_url = button_url | relative_url %}
+              {% else %}
+                {% assign resolved_button_url = button_url | prepend: 'https://' %}
+              {% endif %}
+              <p class="content-button-wrap"><a class="content-button" href="{{ resolved_button_url | escape }}">{{ section.label | escape }} ↗</a></p>
+          {% endcase %}
+        {% endfor %}
+      {% else %}
+        {{ content }}
+      {% endif %}
+      <aside class="content-callout post-cta">
+        <h3>Quer aplicar isso no seu negócio?</h3>
+        <div><p>A Franzzz Co. faz uma análise gratuita dos seus anúncios ou do seu Instagram e mostra o que mudaria. Sem compromisso.</p></div>
+        <p class="content-button-wrap"><a class="content-button" href="{{ '/#contato' | relative_url }}">Pedir análise gratuita ↗</a></p>
+      </aside>
+      <section class="author-box" aria-label="Sobre a autora">
+        <strong>{{ page.author | default: "Nicoly Franz" }}</strong>
+        <p>Fundadora da Franzzz Co., agência de tráfego pago (Google Ads e Meta Ads) e social media em Ijuí – RS. Escreve sobre anúncios e marketing para pequenas empresas.</p>
+        <a href="https://instagram.com/franzzzco" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+      </section>
+    </article>
+    <aside class="article-aside"><strong>FRANZZZ CO.</strong>Tráfego pago e social media para pequenas empresas de Ijuí – RS e região.<a class="back-link" href="{{ '/blog/' | relative_url }}">← Voltar ao blog</a><a class="back-link" href="{{ '/#contato' | relative_url }}">Análise gratuita ↗</a></aside>
+  </div>
+</main>
