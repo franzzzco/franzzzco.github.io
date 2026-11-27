@@ -156,8 +156,8 @@ sections:
     author: Nicoly Franzzz
   - type: button
     label: Acessar site
-    url: franzzzco.github.io
+    url: /
   - type: button
     label: Ver mais artigos
-    url: franzzzco.github.io/blog/
+    url: /blog/
 ---
