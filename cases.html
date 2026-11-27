@@ -1278,8 +1278,46 @@ footer {
 .hero-art .floating-label,.hero-art .art-top,.hero-art .art-caption {z-index:2;}
 /* Setas dos cards são decorativas; nunca ocupam a leitura. */
 .case-result::after {content:none!important;}
+
+/* ===== Auditoria mobile-first — 26/11/2026 ===== */
+html, body { max-width:100%; }
+body.page-cases { overflow-x:clip; }
+.page-cases main, .page-cases section, .page-cases .wrap,
+.page-cases .hero-grid, .page-cases .case-card,
+.page-cases .case-copy, .page-cases .case-result { min-width:0; }
+.page-cases img, .page-cases video, .page-cases iframe { max-width:100%; }
+@media (max-width:760px) {
+  .page-cases .hero h1 { max-width:100%; overflow-wrap:break-word; }
+  .page-cases .hero h1 .hero-line { max-width:100%; }
+  .page-cases .hero h1 .highlight {
+    display:inline;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    box-decoration-break:clone;
+    -webkit-box-decoration-break:clone;
+  }
+  .page-cases .hero h1 .highlight::before { inset:16% -.07em 0; }
+  .page-cases .case-card { grid-template-columns:minmax(0,1fr); }
+  .page-cases .case-copy, .page-cases .case-result { min-width:0; }
+  .page-cases .case-stages { grid-template-columns:minmax(0,1fr); }
+  .page-cases .result-secondary { display:flex; flex-wrap:wrap; }
+  .page-cases .result-secondary > span { min-width:0; flex:1 1 40%; overflow-wrap:anywhere; }
+  .page-cases .clarity-grid, .page-cases .cta-grid { min-width:0; }
+  .page-cases .footer-inner { gap:16px; }
+  .page-cases .navlinks { min-width:0; }
+  .page-cases .navlinks a { white-space:normal; }
+}
+@media (max-width:390px) {
+  .page-cases .wrap { width:calc(100% - 36px); }
+  .page-cases .hero h1 { font-size:clamp(32px,9.5vw,38px); }
+  .page-cases .case-copy, .page-cases .case-result { padding:22px; }
+  .page-cases .result-number { font-size:clamp(36px,11vw,48px); }
+  .page-cases .result-number.word { font-size:clamp(27px,8vw,33px); }
+  .page-cases .result-secondary { gap:10px; }
+  .page-cases .result-secondary strong { overflow-wrap:anywhere; }
+}
 </style>
-<link rel="stylesheet" href="assets/css/design-system.css?v=20261124c">
+<link rel="stylesheet" href="assets/css/design-system.css?v=20261126a">
 <script>
 /**
  * FRANZZZ CO. — Página de Cases
