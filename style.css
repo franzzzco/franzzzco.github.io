@@ -338,3 +338,82 @@ body::before {
   .hero-art::after, .manifesto-star { animation: none !important; }
   .service, .steps article, .brand-panel, .button, .nav-cta, .mobile-cta { transition: none !important; }
 }
+
+
+/* ===== MOVIMENTO MAIS VISÍVEL — NOV/2026 =====
+   Animações perceptíveis também no mobile, sem trocar fontes ou conteúdo. */
+.hero-copy .eyebrow,
+.hero-copy h1 .hero-line,
+.hero-copy .intro,
+.hero-copy .button {
+  opacity: 0;
+  animation: hero-copy-in .8s cubic-bezier(.2,.75,.2,1) forwards;
+}
+.hero-copy .eyebrow { animation-delay: .08s; }
+.hero-copy h1 .hero-line:nth-child(1) { animation-delay: .18s; }
+.hero-copy h1 .hero-line:nth-child(2) { animation-delay: .32s; }
+.hero-copy h1 .hero-line:nth-child(3) { animation-delay: .46s; }
+.hero-copy .intro { animation-delay: .62s; }
+.hero-copy .button { animation-delay: .78s; }
+@keyframes hero-copy-in {
+  from { opacity: 0; transform: translateY(28px); filter: blur(5px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+/* A arte lateral deixa de ser estática: órbitas e etiquetas têm movimento claro. */
+.hero-art { animation: hero-art-in 1s .25s both, hero-art-hover 7s 1.25s ease-in-out infinite; }
+@keyframes hero-art-in {
+  from { opacity: 0; transform: translateY(35px) rotate(-8deg) scale(.94); }
+  to { opacity: 1; transform: translateY(0) rotate(-3deg) scale(1); }
+}
+@keyframes hero-art-hover {
+  0%,100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-13px) rotate(-1deg); }
+}
+.hero .orbit { animation-duration: 16s; }
+.hero .orbit-two { animation-duration: 11s; }
+.hero .floating-label { animation-duration: 3.8s; }
+.hero .label-two { animation-delay: -1.9s; }
+.hero-art::after { animation-duration: 3.8s; }
+.manifesto-star { animation-duration: 11s; }
+/* Revelação mais perceptível quando cada bloco entra na área visível. */
+.reveal { transition: opacity .85s ease, transform .85s cubic-bezier(.2,.75,.2,1), filter .85s ease; }
+.reveal.pending { opacity: 0; transform: translateY(42px) scale(.975); filter: blur(7px); }
+.service-grid .service:nth-child(2) { transition-delay: .14s; }
+.steps article:nth-child(2) { transition-delay: .10s; }
+.steps article:nth-child(3) { transition-delay: .20s; }
+.steps article:nth-child(4) { transition-delay: .30s; }
+.service:hover { transform: translateY(-10px) scale(1.012); }
+.service:hover .service-symbol { transform: rotate(14deg) scale(1.16); }
+.button:hover { transform: translateY(-4px) scale(1.015); }
+/* No mobile a arte entra logo depois da mensagem, em vez de ficar escondida. */
+@media (max-width: 760px) {
+  .hero-art {
+    display: block;
+    width: calc(100% - 18px);
+    max-width: 440px;
+    height: 238px;
+    margin: 34px auto 0;
+    animation: hero-art-in .95s .55s both, hero-art-hover 6s 1.5s ease-in-out infinite;
+  }
+  .hero .orbit { width: 210px; height: 210px; left: calc(50% - 105px); top: 14px; }
+  .hero .orbit-two { width: 150px; height: 150px; left: calc(50% - 75px); top: 44px; }
+  .hero .floating-label { padding: 9px 11px; font-size: 9px; gap: 8px; }
+  .hero .label-one { left: -9px; top: 48px; }
+  .hero .label-two { right: -9px; bottom: 43px; }
+  .hero .art-top { padding: 14px; }
+  .hero .art-caption { left: 14px; right: 14px; bottom: 13px; }
+  .hero-bottom { margin-top: 28px; }
+  .manifesto-star { animation-duration: 13s; }
+  .service:hover { transform: none; }
+}
+@media (hover: none) {
+  .service:hover { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy .eyebrow, .hero-copy h1 .hero-line, .hero-copy .intro,
+  .hero-copy .button, .hero-art, .hero .orbit, .hero .orbit-two,
+  .hero .floating-label, .hero-art::after, .manifesto-star {
+    opacity: 1 !important; animation: none !important; filter: none !important;
+  }
+  .reveal, .reveal.pending { opacity: 1; transform: none; filter: none; }
+}
