@@ -202,3 +202,50 @@
   .hero .intro { margin-bottom: 0; }
   .hero .button { margin-top: 22px; }
 }
+
+
+/* ===== Auditoria mobile-first — 26/11/2026 =====
+   Evita que títulos destacados e conteúdos largos criem rolagem horizontal.
+   Mantém o destaque roxo, permitindo quebra natural em telas estreitas. */
+@media (max-width: 760px) {
+  html, body { max-width: 100%; overflow-x: clip; }
+  .wrap, .hero-grid, .hero-copy, .section-heading, .service-grid,
+  .approach-grid, .faq-grid, .contact-grid, .footer-main, .footer-bottom {
+    min-width: 0;
+  }
+  .hero h1 { max-width: 100%; overflow-wrap: break-word; }
+  .hero-line { max-width: 100%; white-space: normal; }
+  .hero-line .highlight {
+    display: inline-block;
+    width: fit-content;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .hero-line .highlight::before { inset: 14% -.07em 0; }
+  .hero .eyebrow { max-width: 100%; overflow-wrap: anywhere; }
+  .hero-bottom > div > span { white-space: nowrap; }
+  .service, .service-grid > *, .steps > *, .principle,
+  .contact-grid > *, form, .choice-group, .choice-group label { min-width: 0; }
+  .choice-group { flex-wrap: wrap; }
+  .choice-group label { flex: 1 1 30%; }
+  .choice-group span { min-height: 42px; padding-inline: 8px; text-align: center; }
+  .footer-main p { min-width: 0; }
+  img, video, iframe { max-width: 100%; }
+  pre, table { max-width: 100%; overflow-x: auto; }
+}
+@media (max-width: 390px) {
+  .wrap { width: calc(100% - 36px); }
+  .hero-grid { width: calc(100% - 36px); }
+  .hero h1 { font-size: clamp(35px, 10.4vw, 42px); }
+  .hero .intro { font-size: 14px; }
+  .hero .button { padding-inline: 14px; }
+  .hero-bottom > div { letter-spacing: .08em; }
+  .service { padding: 22px; }
+  .contact form { padding: 18px; }
+  .footer-main { column-gap: 18px; }
+  .footer-bottom { flex-wrap: wrap; }
+}

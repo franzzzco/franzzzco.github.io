@@ -39,7 +39,16 @@ layout: default
               {% assign spacer_size = section.size | downcase | default: "medio" %}
               <div class="content-spacer content-spacer--{{ spacer_size }}" aria-hidden="true"></div>
             {% when "button" %}
-              <p class="content-button-wrap"><a class="content-button" href="{{ section.url | escape }}">{{ section.label | escape }} ↗</a></p>
+              {% assign button_url = section.url | strip %}
+              {% assign button_prefix = button_url | slice: 0, 1 %}
+              {% if button_url contains '://' %}
+                {% assign resolved_button_url = button_url %}
+              {% elsif button_prefix == '/' or button_prefix == '#' %}
+                {% assign resolved_button_url = button_url | relative_url %}
+              {% else %}
+                {% assign resolved_button_url = button_url | prepend: 'https://' %}
+              {% endif %}
+              <p class="content-button-wrap"><a class="content-button" href="{{ resolved_button_url | escape }}">{{ section.label | escape }} ↗</a></p>
           {% endcase %}
         {% endfor %}
       {% else %}
